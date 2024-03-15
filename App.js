@@ -4,6 +4,8 @@ import { Text, StatusBar, Pressable } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
+import styles from "./AppStyle";
+
 export default function App() {
   const [escaneado, estadoEscaneado] = useState(false);
 
@@ -21,21 +23,24 @@ export default function App() {
   }, []);
 
   return (
-    <LinearGradient colors={["#232526", "#414345"]}>
+    <LinearGradient colors={["#232526", "#414345"]} style={styles.tela}>
       <StatusBar
         translucent
         barStyle="light-content"
         backgroundColor="transparent"
       />
+
+      <Pressable
+        onPress={function () {
+          estadoEscaneado(false);
+        }}
+      >
+        <Text  style={styles.texto}> Escanear novamente </Text>
+      </Pressable>
+      
+      <BarCodeScanner onBarCodeScanned={ Escanear }   style={styles.camera}/>
+
     </LinearGradient>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
