@@ -29,18 +29,17 @@ export default function App() {
         barStyle="light-content"
         backgroundColor="transparent"
       />
-
-      <Pressable
-        onPress={function () {
-          estadoEscaneado(false);
-        }}
-      >
-        <Text  style={styles.texto}> Escanear novamente </Text>
-      </Pressable>
-      
-      <BarCodeScanner onBarCodeScanned={ Escanear }   style={styles.camera}/>
-
+      {escaneado ? (
+        <Pressable
+          onPress={function () {
+            estadoEscaneado(false);
+          }}
+        >
+          <Text style={styles.texto}> Escanear novamente </Text>
+        </Pressable>
+      ) : (
+        <BarCodeScanner onBarCodeScanned={Escanear} style={styles.camera} />
+      )}
     </LinearGradient>
   );
 }
-
